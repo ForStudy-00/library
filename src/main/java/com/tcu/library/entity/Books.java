@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author yjn
- * @since 2020-09-29
+ * @since 2020-10-05
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -62,6 +62,11 @@ public class Books implements Serializable {
      * 图书类型
      */
     private String type;
+
+    /**
+     * 借阅次数
+     */
+    private Integer number;
 
 
 }

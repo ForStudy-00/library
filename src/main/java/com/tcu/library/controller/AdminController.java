@@ -22,6 +22,11 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+    /**
+     * 根据用户名查询admin
+     * @param username
+     * @return
+     */
     @PostMapping("/login/{username}")
     public ResultEntity login(@PathVariable String username) {
         Admin admin = adminService.getAdminByUserName(username);
