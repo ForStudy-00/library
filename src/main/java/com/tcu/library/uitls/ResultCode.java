@@ -7,4 +7,6 @@ package com.tcu.library.uitls;
 public interface ResultCode {
     public static Integer SUCCESS=20000;
     public static Integer ERROR=20001;
+    public static Integer LOGIN_ERROR=20002;
+
 }

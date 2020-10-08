@@ -1,8 +1,7 @@
 package com.tcu.library.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,6 +15,7 @@ import lombok.EqualsAndHashCode;
  * @since 2020-10-05
  */
 @Data
+@TableName("books")
 @EqualsAndHashCode(callSuper = false)
 public class Books implements Serializable {
 
@@ -40,8 +40,7 @@ public class Books implements Serializable {
     /**
      * 简介
      */
-    @TableField("Introduction")
-    private String Introduction;
+    private String introduction;
 
     /**
      * 出版社
@@ -56,7 +55,8 @@ public class Books implements Serializable {
     /**
      * 在库存:0 已借出:1
      */
-    private Integer status;
+    @TableField(fill = FieldFill.INSERT)
+    private String status;
 
     /**
      * 图书类型
@@ -66,7 +66,8 @@ public class Books implements Serializable {
     /**
      * 借阅次数
      */
-    private Integer number;
+    @TableField(fill = FieldFill.INSERT)
+    private String number;
 
 
 }
