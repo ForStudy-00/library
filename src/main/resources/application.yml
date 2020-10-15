@@ -1,5 +1,5 @@
 server:
-  port: 8001
+  port: 8005
   # mysql数据库连接
 spring:
   datasource:
@@ -7,8 +7,20 @@ spring:
     username: root
     password: root
     url: jdbc:mysql://localhost:3306/library?serverTimezone=UTC
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      enabled: true
 #        mybatis日志
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:static/mapper/xml/*.xml
+
+aliyun:
+  oss:
+    file:
+      endpoint: oss-cn-beijing.aliyuncs.com
+      keyid: LTAI4GEpkZ5RDSESgJdezm5c
+      keysecret: dnrnb63Sbksm1fSW8WMZrvrcVJHudl
+      bucketname: tcu-libary

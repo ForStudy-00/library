@@ -10,6 +10,6 @@ import java.io.Serializable;
  */
 @Data
 public class BookQuery implements Serializable {
-    private String searchTitle;
-    private String searchAuthor;
+    private String title;
+    private String id;
 }

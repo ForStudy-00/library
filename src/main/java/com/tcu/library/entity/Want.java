@@ -13,26 +13,29 @@ import java.io.Serializable;
  * </p>
  *
  * @author yjn
- * @since 2020-09-29
+ * @since 2020-10-15
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Admin implements Serializable {
+public class Want implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 用户名
+     * 借阅号
      */
-    private String username;
-
-    @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private String borrowNum;
 
     /**
-     * 密码
+     * 图书编号
      */
-    private String password;
+    private String bookId;
+
+    /**
+     * id
+     */
+      @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
 
 
 }

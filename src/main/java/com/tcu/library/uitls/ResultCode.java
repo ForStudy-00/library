@@ -5,8 +5,10 @@ package com.tcu.library.uitls;
  * @Date: 2020/9/29 20:24
  */
 public interface ResultCode {
-    public static Integer SUCCESS=20000;
-    public static Integer ERROR=20001;
-    public static Integer LOGIN_ERROR=20002;
+    Integer SUCCESS=20000;
+    Integer ERROR=20001;
+    Integer LOGIN_ERROR=20002;
+    Integer ID_EXIST=20003;
+    Integer ID_NOT_EXIST=20004;
 
 }

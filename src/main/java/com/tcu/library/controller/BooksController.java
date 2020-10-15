@@ -2,26 +2,18 @@ package com.tcu.library.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.tcu.library.entity.BookQuery;
 import com.tcu.library.entity.Books;
-import com.tcu.library.mapper.BooksMapper;
 import com.tcu.library.service.BooksService;
+import com.tcu.library.uitls.ResultCode;
 import com.tcu.library.uitls.ResultEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 /**
- * <p>
- * 前端控制器
- * </p>
  *
  * @author yjn
  * @since 2020-10-05
@@ -37,7 +29,7 @@ public class BooksController {
     /**
      * 查询所有图书
      *
-     * @return
+     * @return 所有图书
      */
     @GetMapping("/getBookList")
     public ResultEntity getBookList() {
@@ -48,10 +40,10 @@ public class BooksController {
     /**
      * 根据编号删除图书
      *
-     * @param id
-     * @return
+     * @param id 书籍编号
+     * @return 是否删除
      */
-    @DeleteMapping("/delete/by/{id}")
+    @GetMapping("/delete/by/{id}")
     public ResultEntity deleteById(@PathVariable String id) {
         boolean isRemoved = booksService.removeById(id);
         if (isRemoved) {
@@ -63,8 +55,8 @@ public class BooksController {
 
     /**
      * 根据id批量删除图书
-     * @param bookids
-     * @return
+     * @param bookids 书籍编号数组
+     * @return 是否删除
      */
     @GetMapping("/delete/batch/books")
     public ResultEntity deleteBatchBooks(String[] bookids){
@@ -79,25 +71,46 @@ public class BooksController {
     }
 
     /**
+     * 修改图书状态
+     * @param id 图书编号
+     * @param status 要修改的状态
+     * @return 修改是否成功
+     */
+    @GetMapping("/update/status/{id}/{status}")
+    public ResultEntity updateStatus(@PathVariable String id,@PathVariable String status){
+        Books updateBook = booksService.getById(id);
+        updateBook.setStatus(status);
+        boolean isUpdate = booksService.updateById(updateBook);
+        if (isUpdate){
+            return ResultEntity.ok();
+        }else {
+            return ResultEntity.error();
+        }
+    }
+    /**
      * 添加图书
      *
-     * @param book
-     * @return
+     * @param book 要添加的图书
+     * @return 添加的状态
      */
     @PostMapping("/add/book")
     public ResultEntity addBook(@RequestBody Books book) {
+        Books isExist = booksService.getById(book.getId());
+        if (isExist==null){
         boolean save = booksService.save(book);
-        if (save) {
+        if (save){
             return ResultEntity.ok();
-        } else {
+        }else {
             return ResultEntity.error();
         }
+        }
+            return ResultEntity.error().code(ResultCode.ID_EXIST).message("id重复");
     }
 
     /**
      * 更新图书
-     * @param book
-     * @return
+     * @param book 要更新的图书
+     * @return 更新的状态
      */
     @PostMapping("/update/book")
     public ResultEntity updateBook(@RequestBody Books book) {
@@ -109,20 +122,39 @@ public class BooksController {
         }
     }
 
+
     /**
-     * 根据书名或作者查询
-     * @param bookQuery
-     * @return
+     * 根据书名或者编号查询
+     * @param id 书籍编号
+     * @param title 书名
+     * @return 查询的图书
      */
-    @PostMapping("/condition/query")
-    public ResultEntity conditionQuery(@RequestBody(required = false)BookQuery bookQuery){
+    @GetMapping("/condition/query/{id}/{title}")
+    public ResultEntity conditionQuery(@PathVariable(required = false) String id,@PathVariable(required = false) String title){
         QueryWrapper<Books> wrapper=new QueryWrapper<>();
-        if (StringUtils.isEmpty(bookQuery.getSearchAuthor())&&StringUtils.isEmpty(bookQuery.getSearchTitle())){
+        //id和title都为空则查询所有
+        if (id==null&&title==null){
           return  this.getBookList();
         }
-        wrapper.like("title", bookQuery.getSearchTitle()).or().like("author", bookQuery.getSearchAuthor());
-        List<Books> list = booksService.list(wrapper);
-        return ResultEntity.ok().data("row",list);
+        //id为空则根据title查询
+        if (id==null){
+            wrapper.eq("title", title);
+            Books book = booksService.getOne(wrapper);
+            return ResultEntity.ok().data("book",book);
+        }
+        //title为空则根据id查询
+        if (title==null){
+            wrapper.eq("id", id);
+            Books book = booksService.getOne(wrapper);
+            return ResultEntity.ok().data("book",book);
+        }
+        return ResultEntity.error();
+    }
+
+    @PostMapping("/addBooksByExcel")
+    public ResultEntity addBooksByExcel(MultipartFile file){
+    booksService.addBooksByExcel(file,booksService);
+    return ResultEntity.ok();
     }
 }
 

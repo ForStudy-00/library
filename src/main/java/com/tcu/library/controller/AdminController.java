@@ -26,8 +26,8 @@ public class AdminController {
 
     /**
      * 根据用户名查询admin
-     * @param admin
-     * @return
+     * @param admin 管理员对象
+     * @return 修改状态
      */
     @PostMapping("/login")
     public ResultEntity login(@RequestBody Admin admin) {
@@ -41,8 +41,8 @@ public class AdminController {
 
     /**
      * 根据id修改admin
-     * @param admin
-     * @return
+     * @param admin 管理员对象
+     * @return 修改状态
      */
     @PostMapping("/update")
     public ResultEntity updateAdmin(@RequestBody Admin admin){

@@ -1,11 +1,11 @@
 package com.tcu.library.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -16,6 +16,7 @@ import lombok.EqualsAndHashCode;
  * @since 2020-09-29
  */
 @Data
+@TableName("user_book")
 @EqualsAndHashCode(callSuper = false)
 public class UserBook implements Serializable {
 
@@ -29,13 +30,15 @@ public class UserBook implements Serializable {
     /**
      * 订单创建时间
      */
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     /**
      * 订单编号
      */
-      @TableId(value = "id", type = IdType.ID_WORKER_STR)
-    private Integer id;
+    @TableField(fill = FieldFill.INSERT)
+    @TableId(value = "id", type = IdType.ID_WORKER_STR)
+    private String id;
 
     /**
      * 书籍编号
@@ -43,9 +46,10 @@ public class UserBook implements Serializable {
     private String bookId;
 
     /**
-     * 已逾期:0 已预约:1 借阅中:2 已归还:3
+     * 已预约:0 借阅中:1 已归还:2 已逾期:3
      */
-    private Integer status;
+    @TableField(fill = FieldFill.INSERT)
+    private String status;
 
     /**
      * 预计归还时间

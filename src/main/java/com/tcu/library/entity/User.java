@@ -2,9 +2,10 @@ package com.tcu.library.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -23,18 +24,13 @@ public class User implements Serializable {
     /**
      * 用户的openid
      */
-      @TableId(value = "openid", type = IdType.ID_WORKER_STR)
     private String openid;
 
     /**
      * 借阅号
      */
+    @TableId(value = "borrow_num", type = IdType.ID_WORKER_STR)
     private String borrowNum;
-
-    /**
-     * 用户头像
-     */
-    private String avatar;
 
     /**
      * 用户昵称
