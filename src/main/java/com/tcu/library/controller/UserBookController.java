@@ -23,6 +23,7 @@ import java.util.List;
  * @since 2020-09-29
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/library/userBook")
 public class UserBookController {
     @Autowired
@@ -57,9 +58,9 @@ public class UserBookController {
         if (save){
             //借阅之后让图书的借阅量加1
             Books book = booksService.getById(userBook.getBookId());
-            int number = Integer.parseInt(book.getNumber());
+            int number = book.getNumber();
             number=number+1;
-            book.setNumber(number+"");
+            book.setNumber(number);
             booksService.updateById(book);
             return ResultEntity.ok();
         }else {
@@ -74,10 +75,10 @@ public class UserBookController {
      * @return 是否成功
      */
     @GetMapping("/update/status/{id}/{status}")
-    public ResultEntity updateStatus(@PathVariable String id,@PathVariable String status){
+    public ResultEntity updateStatus(@PathVariable String id,@PathVariable int status){
         UserBook userBook = userBookService.getById(id);
         if (userBook==null){
-            return ResultEntity.error().message("订单号错误");
+            return ResultEntity.error().message("借阅单号错误");
         }else {
             userBook.setStatus(status);
             userBookService.updateById(userBook);
@@ -87,14 +88,29 @@ public class UserBookController {
 
     /**
      * 根据借阅号查询借阅历史
-     * @param id 借阅号
+     * @param borrowNum 借阅号
      * @return 借阅历史
      */
-    @GetMapping("/getOneList/by/{id}")
-    public ResultEntity getOneList(@PathVariable String id){
-        userBookQueryWrapper.eq("borrow_num", id);
+    @GetMapping("/getOneList/by/{borrowNum}")
+    public ResultEntity getOneList(@PathVariable String borrowNum){
+        userBookQueryWrapper.eq("borrow_num", borrowNum);
         List<UserBook> list = userBookService.list(userBookQueryWrapper);
         return ResultEntity.ok().data("list",list);
+    }
+
+    /**
+     * 根据借阅单id删除记录
+     * @param id 借阅单号
+     * @return 是否删除
+     */
+    @GetMapping("/delete/by/{id}")
+    public ResultEntity deleteById(@PathVariable String id){
+        boolean isRemoved = userBookService.removeById(id);
+        if (isRemoved){
+            return ResultEntity.ok();
+        }else {
+            return ResultEntity.error();
+        }
     }
 
     /**

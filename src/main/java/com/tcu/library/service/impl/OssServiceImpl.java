@@ -7,7 +7,6 @@ import com.tcu.library.service.OssService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.UUID;
 
@@ -53,8 +52,7 @@ public class OssServiceImpl implements OssService {
             // 关闭OSSClient。
             ossClient.shutdown();
             return url;
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
             return "上传失败";
         }
     }

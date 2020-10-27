@@ -32,6 +32,9 @@ public class AdminController {
     @PostMapping("/login")
     public ResultEntity login(@RequestBody Admin admin) {
         Admin adminByUserName = adminService.getAdminByUserName(admin.getUsername());
+        if (adminByUserName==null){
+            return ResultEntity.error().code(ResultCode.ID_NOT_EXIST).message("用户名错误");
+        }
         if (adminByUserName.getPassword().equals(admin.getPassword())){
         return ResultEntity.ok();
         }else {

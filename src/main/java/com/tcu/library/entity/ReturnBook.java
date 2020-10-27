@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -13,43 +14,44 @@ import java.io.Serializable;
  * </p>
  *
  * @author yjn
- * @since 2020-09-29
+ * @since 2020-10-19
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class User implements Serializable {
+public class ReturnBook implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 用户的openid
+     * id
      */
-    private String openid;
+      @TableId(value = "id", type = IdType.ASSIGN_UUID)
+    private String id;
+
+    /**
+     * 图书编号
+     */
+    private String bookId;
 
     /**
      * 借阅号
      */
-    @TableId(value = "borrow_num", type = IdType.ID_WORKER_STR)
     private String borrowNum;
 
     /**
-     * 用户昵称
+     * 还书状态 0:正常归还 1:延期归还
      */
-    private String nickname;
-
-
-    /**
-     * 用户手机号
-     */
-    private String phone;
+    private Integer state;
 
     /**
-     * 年级
+     * 还书时间
      */
-    private String grade;
+    private Date returnTime;
 
     /**
-     * 专业
+     * 理由
      */
-    private String profession;
+    private String reason;
+
+
 }

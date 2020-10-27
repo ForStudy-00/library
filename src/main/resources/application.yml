@@ -11,6 +11,8 @@ spring:
     multipart:
       max-file-size: 10MB
       enabled: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
 #        mybatis日志
 mybatis-plus:
   configuration:

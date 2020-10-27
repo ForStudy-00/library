@@ -38,7 +38,7 @@ public class UserBook implements Serializable {
      */
     @TableField(fill = FieldFill.INSERT)
     @TableId(value = "id", type = IdType.ID_WORKER_STR)
-    private String id;
+    private String userBookId;
 
     /**
      * 书籍编号
@@ -49,7 +49,7 @@ public class UserBook implements Serializable {
      * 已预约:0 借阅中:1 已归还:2 已逾期:3
      */
     @TableField(fill = FieldFill.INSERT)
-    private String status;
+    private int status;
 
     /**
      * 预计归还时间

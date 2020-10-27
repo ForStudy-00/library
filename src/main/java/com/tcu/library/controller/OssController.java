@@ -17,10 +17,14 @@ public class OssController {
     @Autowired
     private OssService ossService;
 
+    /**
+     *
+     * @param file 要上传的图片
+     * @return
+     */
     @PostMapping("/upload/image")
-    public ResultEntity uploadBookImage(MultipartFile file){
-        String url = ossService.uploadBookImage(file);
-        return ResultEntity.ok().data("url",url);
+    public String uploadBookImage(MultipartFile file){
+       return ossService.uploadBookImage(file);
     }
 
     @GetMapping("/download/demo")

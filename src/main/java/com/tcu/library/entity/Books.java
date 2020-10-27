@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author yjn
@@ -25,7 +25,7 @@ public class Books implements Serializable {
     /**
      * 书籍编号
      */
-    @TableId(value = "id", type = IdType.ID_WORKER_STR)
+    @TableId(value = "id",type = IdType.INPUT)
     @ExcelProperty(index = 0)
     private String id;
 
@@ -56,14 +56,13 @@ public class Books implements Serializable {
     /**
      * 书籍封面地址
      */
-    @TableField(fill = FieldFill.INSERT)
-    private String url;
+    private String url="https://tcu-libary.oss-cn-beijing.aliyuncs.com/tcu-libary/no-cover.jpg";
 
     /**
      * 在库存:0 已借出:1
      */
     @TableField(fill = FieldFill.INSERT)
-    private String status;
+    private int status;
 
     /**
      * 图书类型
@@ -75,7 +74,7 @@ public class Books implements Serializable {
      * 借阅次数
      */
     @TableField(fill = FieldFill.INSERT)
-    private String number;
+    private int number;
 
 
 }
