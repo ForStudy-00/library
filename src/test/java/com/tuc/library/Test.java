@@ -1,8 +1,10 @@
 package com.tuc.library;
 
 import com.tcu.library.LibraryApplication;
+import com.tcu.library.entity.ReturnBook;
 import com.tcu.library.entity.User;
 import com.tcu.library.entity.UserBook;
+import com.tcu.library.service.ReturnBookService;
 import com.tcu.library.service.UserBookService;
 import com.tcu.library.service.UserService;
 import org.junit.runner.RunWith;
@@ -27,6 +29,9 @@ public class Test {
     @Autowired
     private UserBookService userBookService;
 
+    @Autowired
+    private ReturnBookService returnBookService;
+
     @org.junit.Test
     public void addUser() {
 
@@ -36,6 +41,8 @@ public class Test {
             user.setBorrowNum("" + i);
             user.setNickname("name" + i);
             user.setPhone("" + i);
+            user.setGrade("计算机");
+            user.setProfession("软件");
             userService.save(user);
         }
     }
@@ -54,8 +61,8 @@ public class Test {
             UserBook userBook=new UserBook();
             Random random=new Random();
 
-            userBook.setBorrowNum(random.nextInt(9)+30+"");
-            userBook.setBookId("test");
+            userBook.setBorrowNum(random.nextInt(9)+10+"");
+            userBook.setBookId("D-"+(random.nextInt(5)+20));
 
             userBook.setReturnTime(new Date());
             userBook.setTakeTime(new Date());
@@ -64,4 +71,17 @@ public class Test {
         }
     }
 
+    @org.junit.Test
+    public void addReturnBook(){
+        for (int i = 0; i <50 ; i++) {
+            ReturnBook returnBook=new ReturnBook();
+            Random random = new Random();
+            returnBook.setBookId("D-"+(random.nextInt(5)+20));
+            returnBook.setBorrowNum(random.nextInt(49)+"");
+            returnBook.setReturnTime(new Date());
+            returnBook.setState(random.nextInt(2));
+            returnBook.setReason("测试");
+            returnBookService.save(returnBook);
+        }
+    }
 }

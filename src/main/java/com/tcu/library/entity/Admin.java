@@ -28,7 +28,6 @@ public class Admin implements Serializable {
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
-
     /**
      * 密码
      */

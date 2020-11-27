@@ -159,19 +159,20 @@ public class BooksController {
      */
     @GetMapping("/condition/query/{id}/{title}")
     public ResultEntity conditionQuery(@PathVariable(required = false) String id, @PathVariable(required = false) String title, @PathVariable String type) {
-        QueryWrapper<Books> wrapper = new QueryWrapper<>();
         //id和title都为空则查询所有
         if (id == null && title == null) {
             return this.getBookList();
         }
         //id为空则根据title查询
         if (id == null) {
+            QueryWrapper<Books> wrapper = new QueryWrapper<>();
             wrapper.eq("title", title);
             Books book = booksService.getOne(wrapper);
             return ResultEntity.ok().data("book", book);
         }
         //title为空则根据id查询
         if (title == null) {
+            QueryWrapper<Books> wrapper = new QueryWrapper<>();
             wrapper.eq("id", id);
             Books book = booksService.getOne(wrapper);
             return ResultEntity.ok().data("book", book);

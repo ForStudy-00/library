@@ -1,5 +1,5 @@
 server:
-  port: 8005
+  port: 9264
   # mysql数据库连接
 spring:
   datasource:
