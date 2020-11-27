@@ -13,6 +13,8 @@ spring:
       enabled: true
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
+  application:
+    name: library
 #        mybatis日志
 mybatis-plus:
   configuration:
