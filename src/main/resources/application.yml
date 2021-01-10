@@ -1,21 +1,27 @@
 server:
   port: 9264
+  ssl:
+    key-store: classpath:tculibrary.p12
+    key-alias: tculibrary
+    key-store-password: 219264
   # mysql数据库连接
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: root
-    url: jdbc:mysql://localhost:3306/library?serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/library?serverTimezone=Asia/Shanghai
   servlet:
     multipart:
       max-file-size: 10MB
       enabled: true
+
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
   application:
     name: library
-#        mybatis日志
+# mybatis日志
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

@@ -1,7 +1,12 @@
 package com.tcu.library.service;
 
-import com.tcu.library.entity.UserBook;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.tcu.library.entity.PendTakenBook;
+import com.tcu.library.entity.UserBook;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +18,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface UserBookService extends IService<UserBook> {
 
+    ArrayList<PendTakenBook> getDetailsPendingTaken(String borrowNum);
+
+    List<HashMap<String, Object>> getReturnTime();
+
+    void updataStatusToThree(String id);
 }

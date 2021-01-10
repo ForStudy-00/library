@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tcu.library.mapper.UserBookMapper">
+    <update id="updataStatusToThree">
+        update user_book set status=3 where id=#{id} and status=1;
+    </update>
 
+    <select id="getDetailsPendingTaken" resultType="com.tcu.library.entity.PendTakenBook">
+        SELECT u.id orderId,u.book_id, title,url,author,return_time,take_time, u.`status` FROM books b RIGHT JOIN user_book u on u.book_id=b.id WHERE u.borrow_num=#{borrowNum}
+    </select>
+    <select id="getReturnTime" resultType="hashmap">
+        select id, return_time from user_book;
+    </select>
 </mapper>

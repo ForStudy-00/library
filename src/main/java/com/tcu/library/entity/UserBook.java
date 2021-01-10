@@ -1,6 +1,7 @@
 package com.tcu.library.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -54,11 +55,13 @@ public class UserBook implements Serializable {
     /**
      * 预计归还时间
      */
+     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     private Date returnTime;
 
     /**
      * 取书时间
      */
+     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     private Date takeTime;
 
 

@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author yjn
@@ -34,8 +34,7 @@ public class Want implements Serializable {
     /**
      * id
      */
-      @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
-
+    @TableId(value = "id", type = IdType.ASSIGN_UUID)
+    private String id;
 
 }

@@ -5,6 +5,8 @@ import com.tcu.library.entity.Admin;
 import com.tcu.library.service.AdminService;
 import com.tcu.library.uitls.ResultCode;
 import com.tcu.library.uitls.ResultEntity;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 @RestController
 @RequestMapping("/library/admin")
+@Api(description = "管理员相关的api")
 public class AdminController {
 
     @Autowired
@@ -29,6 +32,7 @@ public class AdminController {
      * @param admin 管理员对象
      * @return 修改状态
      */
+    @ApiOperation("管理员登录")
     @PostMapping("/login")
     public ResultEntity login(@RequestBody Admin admin) {
         Admin adminByUserName = adminService.getAdminByUserName(admin.getUsername());
@@ -47,6 +51,7 @@ public class AdminController {
      * @param admin 管理员对象
      * @return 修改状态
      */
+    @ApiOperation("修改管理员信息")
     @PostMapping("/update")
     public ResultEntity updateAdmin(@RequestBody Admin admin){
         boolean isUpdate = adminService.updateById(admin);

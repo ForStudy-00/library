@@ -1,26 +1,26 @@
 package com.tuc.library;
 
-import com.tcu.library.LibraryApplication;
 import com.tcu.library.entity.ReturnBook;
 import com.tcu.library.entity.User;
 import com.tcu.library.entity.UserBook;
 import com.tcu.library.service.ReturnBookService;
 import com.tcu.library.service.UserBookService;
 import com.tcu.library.service.UserService;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 /**
  * @Author: yjn
  * @Date: 2020/10/25 22:39
  */
-@SpringBootTest(classes = LibraryApplication.class)
-@RunWith(SpringRunner.class)
+//@SpringBootTest(classes = LibraryApplication.class)
+//@RunWith(SpringRunner.class)
 public class Test {
 
     @Autowired
@@ -83,5 +83,27 @@ public class Test {
             returnBook.setReason("测试");
             returnBookService.save(returnBook);
         }
+    }
+
+    @org.junit.Test
+    public void testGetReturnTime() {
+        List<HashMap<String, Object>> returnTimeList = userBookService.getReturnTime();
+        Date today=new Date();
+        returnTimeList.forEach((item)->{
+            Date returnTime = (Date) item.get("return_time");
+            String id = (String) item.get("id");
+            //判断还书日期是否超过今天
+            if (today.after(returnTime)){
+                userBookService.updataStatusToThree(id);
+            }
+        });
+    }
+    @org.junit.Test
+    public void testTime() throws ParseException {
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String format1 = format.format(new Date());
+        System.out.println(new Date());
+        System.out.println(format1);
+        System.out.println(format.parse(format1));
     }
 }
