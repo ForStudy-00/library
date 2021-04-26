@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 
 /**
@@ -26,7 +27,9 @@ public class UserBook implements Serializable {
     /**
      * 借阅号
      */
-    private String borrowNum;
+    private BigInteger borrowNum;
+
+    private String bookName;
 
     /**
      * 订单创建时间
@@ -37,9 +40,9 @@ public class UserBook implements Serializable {
     /**
      * 订单编号
      */
-    @TableField(fill = FieldFill.INSERT)
-    @TableId(value = "id", type = IdType.ID_WORKER_STR)
-    private String userBookId;
+//    @TableField(fill = FieldFill.INSERT)
+    @TableId(value = "id", type = IdType.AUTO)
+    private BigInteger userBookId;
 
     /**
      * 书籍编号
@@ -55,7 +58,7 @@ public class UserBook implements Serializable {
     /**
      * 预计归还时间
      */
-     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
+//     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     private Date returnTime;
 
     /**

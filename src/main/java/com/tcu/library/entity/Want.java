@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 
 /**
  * <p>
@@ -24,7 +25,7 @@ public class Want implements Serializable {
     /**
      * 借阅号
      */
-    private String borrowNum;
+    private BigInteger borrowNum;
 
     /**
      * 图书编号

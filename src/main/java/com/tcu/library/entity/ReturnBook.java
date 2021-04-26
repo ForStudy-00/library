@@ -2,11 +2,11 @@ package com.tcu.library.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 
 /**
@@ -37,7 +37,7 @@ public class ReturnBook implements Serializable {
     /**
      * 借阅号
      */
-    private String borrowNum;
+    private BigInteger borrowNum;
 
     /**
      * 还书状态 0:正常归还 1:延期归还
@@ -47,7 +47,7 @@ public class ReturnBook implements Serializable {
     /**
      * 还书时间
      */
-    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
+//    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     private Date returnTime;
 
     /**
@@ -55,5 +55,9 @@ public class ReturnBook implements Serializable {
      */
     private String reason;
 
+    /**
+     * 是否提交还书申请 0未提交 1已提交
+     */
+    //private int returnStatus;
 
 }

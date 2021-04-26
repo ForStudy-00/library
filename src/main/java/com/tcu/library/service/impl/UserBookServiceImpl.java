@@ -39,4 +39,9 @@ public class UserBookServiceImpl extends ServiceImpl<UserBookMapper, UserBook> i
     public void updataStatusToThree(String id) {
         userBookMapper.updataStatusToThree(id);
     }
+
+    @Override
+    public int getBorrowedBookNum(String borrowNum) {
+       return userBookMapper.getBorrowBookNum(borrowNum);
+    }
 }

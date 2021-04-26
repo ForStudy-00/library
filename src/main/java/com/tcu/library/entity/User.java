@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 
 /**
  * <p>
@@ -34,8 +35,8 @@ public class User implements Serializable {
      * 借阅号
      */
     @ApiModelProperty(value = "借阅号",required = true)
-    @TableId(value = "borrow_num", type = IdType.ID_WORKER_STR)
-    private String borrowNum;
+    @TableId(value = "borrow_num", type = IdType.AUTO)
+    private BigInteger borrowNum;
 
     /**
      * 用户昵称
@@ -49,6 +50,12 @@ public class User implements Serializable {
      */
     @ApiModelProperty("用户手机号")
     private String phone;
+
+    /**
+     * 用户手机号
+     */
+    @ApiModelProperty("政治面貌")
+    private String politicalStatus;
 
     /**
      * 年级

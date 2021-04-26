@@ -23,4 +23,6 @@ public interface UserBookService extends IService<UserBook> {
     List<HashMap<String, Object>> getReturnTime();
 
     void updataStatusToThree(String id);
+
+    int getBorrowedBookNum(String borrowNum);
 }

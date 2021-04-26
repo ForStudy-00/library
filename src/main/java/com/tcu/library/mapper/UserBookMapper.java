@@ -24,4 +24,6 @@ public interface UserBookMapper extends BaseMapper<UserBook> {
     List<HashMap<String, Object>> getReturnTime();
 
     void updataStatusToThree(@Param("id") String id);
+
+    int getBorrowBookNum(@Param("borrowNum") String borrowNum);
 }

@@ -6,9 +6,12 @@
     </update>
 
     <select id="getDetailsPendingTaken" resultType="com.tcu.library.entity.PendTakenBook">
-        SELECT u.id orderId,u.book_id, title,url,author,return_time,take_time, u.`status` FROM books b RIGHT JOIN user_book u on u.book_id=b.id WHERE u.borrow_num=#{borrowNum}
+        SELECT u.id orderId,u.book_id, title,url,author,return_time,take_time, u.`status` FROM books b RIGHT JOIN user_book u on u.book_id=b.id WHERE u.borrow_num=#{borrowNum} order by u.take_time desc;
     </select>
     <select id="getReturnTime" resultType="hashmap">
         select id, return_time from user_book;
+    </select>
+    <select id="getBorrowBookNum" resultType="java.lang.Integer">
+        select count(id) from user_book where borrow_num=#{borrowNum} and status in (3,1)
     </select>
 </mapper>
