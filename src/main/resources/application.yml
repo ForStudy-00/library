@@ -30,7 +30,7 @@ mybatis-plus:
 aliyun:
   oss:
     file:
-      endpoint: oss-cn-beijing.aliyuncs.com
-      keyid: LTAI4GEpkZ5RDSESgJdezm5c
-      keysecret: dnrnb63Sbksm1fSW8WMZrvrcVJHudl
-      bucketname: tcu-libary
+      endpoint: xxxxxxx(换成自己的)
+      keyid: xxxxxxx(换成自己的)
+      keysecret: xxxxxxx(换成自己的)
+      bucketname: xxxxxxx(换成自己的)
