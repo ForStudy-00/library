@@ -56,7 +56,7 @@ public class Books implements Serializable {
     /**
      * 书籍封面地址
      */
-    private String url="https://tcu-libary.oss-cn-beijing.aliyuncs.com/tcu-libary/no-cover.jpg";
+    private String url="https://tcu-libary.oss-cn-beijing.aliyuncs.com/tcu-library/no-cover.jpg";
 
     /**
      * 在库存:0 已借出:1

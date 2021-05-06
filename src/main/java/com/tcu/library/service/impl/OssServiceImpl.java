@@ -18,10 +18,9 @@ import java.util.UUID;
 public class OssServiceImpl implements OssService {
 
 
-
-
     /**
      * 上传图片
+     *
      * @param file 图书封面图片
      * @return 图片地址
      */
@@ -30,24 +29,24 @@ public class OssServiceImpl implements OssService {
         String endpoint = OssProperties.END_POINT;
         String accessKeyId = OssProperties.KEY_ID;
         String accessKeySecret = OssProperties.KEY_SECRET;
-        String bucketName=OssProperties.BUCKET_NAME;
+        String bucketName = OssProperties.BUCKET_NAME;
         //获取文件的名称
-        String filename = file.getOriginalFilename();
+//        String filename = file.getOriginalFilename();
 
         String uuid = UUID.randomUUID().toString().replaceAll("-", "");
-        filename=bucketName+"/"+uuid+filename;
+        String filename = bucketName + "/" + uuid;
         // 创建OSSClient实例。
-        OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, 																	accessKeySecret);
+        OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
 
         // 上传文件流。
         InputStream inputStream = null;
         try {
             inputStream = file.getInputStream();
             //第二个参数表示上传到oss的文件路径和文件名 eg:aa/bb/1.jpg
-            ossClient.putObject(bucketName,filename , inputStream);
+            ossClient.putObject(bucketName, filename, inputStream);
 
             //获取上传文件的地址
-            String url="https://"+bucketName+"."+endpoint+"/"+filename;
+            String url = "https://" + bucketName + "." + endpoint + "/" + filename;
 
             // 关闭OSSClient。
             ossClient.shutdown();
